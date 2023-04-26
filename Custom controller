@@ -1,0 +1,32 @@
+Here is the Example of Custom controller:
+
+here everything that fetches needs to be created in a class and use the class in vf code as controller
+there are no restrictiuon of data and limitations here
+
+
+
+
+
+<apex:page controller="MyAccountController">    ##  MyAccountController is a Apexclass that need to be created so that the data fetch from there
+    <apex:pageBlock title="My Accounts" >
+        <apex:pageblocktable value="{!accountlist}" var="acc">
+            <apex:column value="{!acc.name}"/>
+            <apex:column value="{!acc.id}"/>
+        </apex:pageblocktable>
+    
+    </apex:pageBlock>
+</apex:page>
+
+
+
+class file 
+
+public class MyAccountController {
+    
+    public list <Account>accountlist {get;set;}        ### get set is used for get the data from database and set to the var
+    
+    public MyAccountController(){                           ## constructor used fro the account list that fetches id name and website from account
+        accountlist = [select id,name,website from Account];
+    }
+
+}
