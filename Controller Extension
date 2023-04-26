@@ -1,0 +1,49 @@
+A controller extension is an apex class used to extends the functionality of standard or custom controller
+
+
+
+WHEN IT IS USED :
+
+When u want to leverage the built in functionality of standard controller but overide one or more actions.
+you want to add new actions
+
+you want to build a vf page that respects user permissions. Although a controller extention class executes in system mode, if a controller extension
+extends a standard controller, the logic from standard controller does not execute in system mode.
+
+
+Example where u use extention :
+
+like when i need check whether the acccount is there or not and fetch the ouptut:
+
+example when extension is create in account
+
+VF PAGES CODE
+<apex:page standardController="Account" extensions="MyControllerExtension">   ##3 extension we need to create another classs
+    {!greeting}<p/>
+    <apex:form> 
+        <apex:inputField  value= "{!account.name}"/> <p/>
+        <apex:commandButton value = "Save" action = "{!Save}"/>
+        
+    </apex:form>
+</apex:page>
+
+
+APEX CLASS CODE:
+
+public class MyControllerExtension {
+    private final Account acct;
+    
+   //the ext constructer initializes the private nummber
+   //var acct by using getRecord method from standard
+   //controller.
+   
+    public MyControllerExtension(Apexpages.StandardController stdController){
+        this.acct = (Account)stdController.getRecord();
+    }
+    public string getGreeting(){
+        return 'Hello' + acct.name + '('+acct.Id+')'; 
+    } 
+
+    
+}
+
