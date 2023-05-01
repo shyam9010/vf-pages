@@ -1,0 +1,24 @@
+<apex:page controller="datetimecontoller">
+ <apex:form>
+ <apex:pageBlock id="fb">
+ <apex:actionPoller action="{!datetimemethod}" reRender="fb" interval="5" />
+ time:{!dateandtime}
+ refresh 5 mins
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>
+
+
+
+Classs :
+
+
+public class datetimecontoller {
+    public datetime dateandtime{get;set;}
+ public void datetimemethod()
+ {
+ dateandtime=system.now();
+ 
+ }
+
+}
